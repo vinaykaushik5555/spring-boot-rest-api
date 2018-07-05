@@ -22,7 +22,7 @@ public class UserController {
 	private UserRepository userRepository;
 	
 	@RequestMapping("/users")
-	public ResponseEntity<List<User>> welcomeApi(){
+	public ResponseEntity<List<User>> getUsers(){
 		
 		return new ResponseEntity(userRepository.findAll(),HttpStatus.OK);
 	}
