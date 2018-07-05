@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,26 +21,21 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@RequestMapping("/students")
-	public List<User> welcomeApi(){
+	@RequestMapping("/users")
+	public ResponseEntity<List<User>> welcomeApi(){
 		
-		return userRepository.findAll();
+		return new ResponseEntity(userRepository.findAll(),HttpStatus.OK);
 	}
 	
-	@GetMapping("users/{id}")
-	public User getUser(@PathVariable Long id){
+	@GetMapping("user/{id}")
+	public ResponseEntity<User> getUser(@PathVariable Long id){
 	
 	 Optional<User> user=userRepository.findById(id);
 		
 	 if(!user.isPresent())
-		try {
-			throw new Exception("User not exists id :"+ id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	 
-		return user.get();
+	 return new ResponseEntity(user.get(),HttpStatus.OK);
 	}
 	
 
