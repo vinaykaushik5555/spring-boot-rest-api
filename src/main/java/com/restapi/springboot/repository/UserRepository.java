@@ -1,11 +1,11 @@
-package com.restapi.springbootREST.repository;
+package com.restapi.springboot.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.restapi.springbootREST.model.User;;
+import com.restapi.springboot.model.User;;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long>{
-	
+public interface UserRepository extends JpaRepository<User, Long> {
+
 }
